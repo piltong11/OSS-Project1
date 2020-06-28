@@ -39,25 +39,28 @@
           <div class="inner cover">
             <h1 class="option-heading">시작하기에 앞서...</h1>
             <br><hr><br>
-            <p class="lead">본인의 성별을 선택해주세요<br><br>
-              <input type='radio' name='gender' value='남자'/> 남자&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='gender' value='여자'/> 여자
-            </p>
-            <br><hr><br>
-            <p class="lead">현재 거주하고 있는 지역을 선택해주세요<br><br>
-              <input type='radio' name='place' value='서울'/> 서울&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='place' value='부산'/> 부산&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='place' value='대구'/> 대구&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='place' value='인천'/> 인천<br><br>
-              <input type='radio' name='place' value='광주'/> 광주&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='place' value='대전'/> 대전&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='place' value='울산'/> 울산&nbsp;&nbsp;&nbsp;
-              <input type='radio' name='place' value='춘천'/> 춘천
-            </p>
-            <br><hr><br>
-            <p class="lead">
-              <a href="./weather" class="btn btn-lg btn-default">설정하기</a>
-            </p>
+            <form action="./weather" method="POST">
+              <p class="lead">본인의 성별을 선택해주세요<br><br>
+                <input type='radio' name='gender' value='남성'/> 남성&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='gender' value='여성'/> 여성
+              </p>
+              <br><hr><br>
+              <p class="lead">현재 거주하고 있는 지역을 선택해주세요<br><br>
+                <input type='radio' name='place' value='서울'/> 서울&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='place' value='부산'/> 부산&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='place' value='대구'/> 대구&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='place' value='인천'/> 인천<br><br>
+                <input type='radio' name='place' value='광주'/> 광주&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='place' value='대전'/> 대전&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='place' value='울산'/> 울산&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='place' value='춘천'/> 춘천
+              </p>
+              <br><hr><br>
+              <p class="lead">
+                <a><input type="submit" value="설정하기"
+                  href="./weather" class="btn btn-lg btn-default"></a>
+              </p>
+            </form>
           </div>
           <div class="mastfoot">
             <div class="inner">
