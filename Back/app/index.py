@@ -3,6 +3,7 @@ from flask import current_app as app
 
 from app.module import dbModule
 from app.module import temp
+from app.module import crawling
 
 cover = Blueprint('cover', __name__, url_prefix='/')
 option = Blueprint('option', __name__, url_prefix='/')
@@ -22,8 +23,11 @@ def index():
 @weather.route('/weather',methods=['POST'])
 def index():
 
+    global gender
+    global place
     gender = request.form['gender']
     place = request.form['place']
+    #기상정보 획득
     temperature = temp.getTemp(place)
 
     return render_template('/weather.html', g=gender, p=place, t=temperature)
@@ -31,17 +35,118 @@ def index():
 @fashion.route('/fashion',methods=['GET'])
 def index():
 
-    db = dbModule.DB()
+    #기상정보 획득
+    temperature = temp.getTemp(place)
+    #패션정보 크롤링
+    crawling.style(temperature,gender)
+    #파일정보 읽기
+    if temperature > 25 :
+        if gender=='남성':
+            f = open("./app/module/link/man-tshirt-href.txt", "r")
+            href1 = f.readline()
+            href2 = f.readline()
+            href3 = f.readline()
+            f.close()
 
-    #sql = 쿼리문 작성
-    #result = db.executeAll(sql)
+            f = open("./app/module/link/man-pants-href.txt", "r")
+            href4 = f.readline()
+            href5 = f.readline()
+            href6 = f.readline()
+            f.close()
 
-    picture1 = 'https://rodenty.com/web/product/medium/20200627/10e3a0f3aa2d20401f391714f9c16968.jpg'
-    picture2 = 'https://rodenty.com/web/product/medium/20200627/10e3a0f3aa2d20401f391714f9c16968.jpg'
-    picture3 = 'https://rodenty.com/web/product/medium/20200627/10e3a0f3aa2d20401f391714f9c16968.jpg'
-    picture4 = 'https://rodenty.com/web/product/medium/20200627/10e3a0f3aa2d20401f391714f9c16968.jpg'
-    picture5 = 'https://rodenty.com/web/product/medium/20200627/10e3a0f3aa2d20401f391714f9c16968.jpg'
-    picture6 = 'https://rodenty.com/web/product/medium/20200627/10e3a0f3aa2d20401f391714f9c16968.jpg'
+            f = open("./app/module/link/man-tshirt-img.txt", "r")
+            img1 = f.readline()
+            img2 = f.readline()
+            img3 = f.readline()
+            f.close()
 
-    return render_template('/fashion.html', p1 = picture1, p2 = picture2, p3 = picture3,
-                                            p4 = picture4, p5 = picture5, p6 = picture6)
+            f = open("./app/module/link/man-pants-img.txt", "r")
+            img4 = f.readline()
+            img5 = f.readline()
+            img6 = f.readline()
+            f.close()
+
+        elif gender=='여성':
+            f = open("./app/module/link/woman-tshirt-href.txt", "r")
+            href1 = f.readline()
+            href2 = f.readline()
+            href3 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/woman-pants-href.txt", "r")
+            href4 = f.readline()
+            href5 = f.readline()
+            href6 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/woman-tshirt-img.txt", "r")
+            img1 = f.readline()
+            img2 = f.readline()
+            img3 = f.readline()
+            f.close()
+
+
+            f = open("./app/module/link/woman-pants-img.txt", "r")
+            img4 = f.readline()
+            img5 = f.readline()
+            img6 = f.readline()
+            f.close()
+
+    elif temperature <= 25 :
+        if gender=='남성':
+            f = open("./app/module/link/man-longshirt-href.txt", "r")
+            href1 = f.readline()
+            href2 = f.readline()
+            href3 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/man-longpants-href.txt", "r")
+            href4 = f.readline()
+            href5 = f.readline()
+            href6 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/man-longshirt-img.txt", "r")
+            img1 = f.readline()
+            img2 = f.readline()
+            img3 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/man-longpants-img.txt", "r")
+            img4 = f.readline()
+            img5 = f.readline()
+            img6 = f.readline()
+            f.close()
+
+        elif gender=='여성':
+            f = open("./app/module/link/woman-longshirt-href.txt", "r")
+            href1 = f.readline()
+            href2 = f.readline()
+            href3 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/woman-longpants-href.txt", "r")
+            href4 = f.readline()
+            href5 = f.readline()
+            href6 = f.readline()
+            f.close()
+
+            f = open("./app/module/link/woman-longshirt-img.txt", "r")
+            img1 = f.readline()
+            img2 = f.readline()
+            img3 = f.readline()
+            f.close()
+
+
+            f = open("./app/module/link/woman-longpants-img.txt", "r")
+            img4 = f.readline()
+            img5 = f.readline()
+            img6 = f.readline()
+            f.close()
+
+    return render_template('/fashion.html', i1=img1, i2=img2,
+                                            i3=img3, i4=img4,
+                                            i5=img5, i6=img6,
+                                            h1=href1, h2=href2,
+                                            h3=href3, h4=href4,
+                                            h5=href5, h6=href6)
